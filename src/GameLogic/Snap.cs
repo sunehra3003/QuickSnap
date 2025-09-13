@@ -34,9 +34,10 @@ namespace CardGames.GameLogic
 		/// <summary>
 		/// Create a new game of Snap!
 		/// </summary>
-		public Snap ()
+		public Snap()
 		{
-			_deck = new Deck ();
+			_deck = new Deck();
+			_gameTimer = SwingGame.Createtimer();
 		}
 
 		/// <summary>
@@ -86,12 +87,13 @@ namespace CardGames.GameLogic
 		/// </summary>
 		public void Start()
 		{
-			if ( ! IsStarted )			// only start if not already started!
+			if (!IsStarted)         // only start if not already started!
 			{
 				_started = true;
-				_deck.Shuffle ();		// Return the cards and shuffle
+				_deck.Shuffle();        // Return the cards and shuffle
 
-				FlipNextCard ();		// Flip the first card...
+				FlipNextCard();     // Flip the first card...
+				_gameTimer.start();
 			}
 		}
 			
@@ -143,6 +145,7 @@ namespace CardGames.GameLogic
 
 			// stop the game...
 			_started = false;
+			_gameTimer.Stop ();
 		}
 	
 		#region Snap Game Unit Tests
